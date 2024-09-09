@@ -25,6 +25,13 @@ namespace CSInterface
             }
         }
 
+        class Dummy : IDisposable
+        {
+            public void Dispose() {
+                Console.WriteLine("Disposable 메서드 호출됨");
+            }
+        }
+
         static void Main(string[] args)
         {
             List<Product> products = new List<Product>()
@@ -42,6 +49,12 @@ namespace CSInterface
             {
                 Console.WriteLine(p.ToString());
             }
+
+            using (Dummy dummy = new Dummy())
+            {
+                Console.WriteLine("using 블록 안에 들어왔습니다.");
+            }
+            Console.WriteLine("using블록을 벗어났습니다.");
         }
     }
 }
