@@ -8,6 +8,20 @@ namespace CSInterface
 {
     internal class Program
     {
+        class TestClass : IBasic
+        {
+            public int TestProperty { 
+                get { return -1; }
+                set { int n = value; }
+            }
+
+            public int TestInstanceMethod()
+            {
+                // do something...
+                return 1;
+            }
+        }
+
         class Product : IComparable<Product>
         {
             public string Name { get; set; }
@@ -55,6 +69,14 @@ namespace CSInterface
                 Console.WriteLine("using 블록 안에 들어왔습니다.");
             }
             Console.WriteLine("using블록을 벗어났습니다.");
+
+            // ew......
+            // 다향성!
+            TestClass tc = new TestClass();
+            IBasic ib = tc;
+            IBasic ib2 = new TestClass();
+            TestClass tc2 = (TestClass)ib2;
+            TestClass tc3 = (TestClass)ib;
         }
     }
 }
