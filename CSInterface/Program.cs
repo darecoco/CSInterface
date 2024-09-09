@@ -8,6 +8,20 @@ namespace CSInterface
 {
     internal class Program
     {
+        class Parent { }
+        class Child : Parent, IComparable<Child>, IDisposable
+        {
+            public int CompareTo(Child other)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Dispose()
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         class TestClass : IBasic
         {
             public int TestProperty { 
@@ -77,6 +91,11 @@ namespace CSInterface
             IBasic ib2 = new TestClass();
             TestClass tc2 = (TestClass)ib2;
             TestClass tc3 = (TestClass)ib;
+
+            Child child = new Child();
+            Parent parent = child;
+            IDisposable childAsDisposable = new Child();
+            IComparable<Child> childAsCompareable = new Child();
         }
     }
 }
